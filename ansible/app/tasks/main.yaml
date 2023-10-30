@@ -1,0 +1,15 @@
+---
+- name: App clone
+  ansible.builtin.git:
+    repo: "{{ repo_addr }}"
+    dest: "{{ src_copy_path }}"
+    clone: yes
+    update: yes
+    version: main
+- name: Tear down existing services
+  community.docker.docker_compose:
+    project_src: "{{ src_copy_path }}"
+    state: absent
+- name: Create and start services
+  community.docker.docker_compose:
+    project_src: "{{ src_copy_path }}"

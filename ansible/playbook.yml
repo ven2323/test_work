@@ -1,0 +1,11 @@
+---
+- name: Setup Docker, Docker-Compose and build app
+  hosts: all
+  become: true
+  roles:
+    - config
+    - docker
+    - app
+  vars:
+    src_copy_path: /home/vagrant/iac-test/
+    repo_addr: https://github.com/ven2323/test_work.git
